@@ -1,16 +1,44 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const elza = localFont({
+  src: [
+    {
+      path: "../fonts/ElzaTrial-Black.woff2",
+      weight: "900",
+      style: "black",
+    },
+    {
+      path: "../fonts/ElzaTrial-Bold.woff2",
+      weight: "700",
+      style: "bold",
+    },
+    {
+      path: "../fonts/ElzaTrial-Medium.woff2",
+      weight: "500",
+      style: "medium",
+    },
+    {
+      path: "../fonts/ElzaTrial-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-elza",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +53,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${elza.variable} antialiased min-h-screen bg-black py-5 px-20`}
+        // className={`${geistSans.variable} ${geistMono.variable} ${elza} antialiased min-h-screen bg-black p-5`}
       >
-        {children}
+        <NavBar />
+        <main className="flex justify-center">{children}</main>
+        <div className="bg-black h-10 py-2">Temp div</div>
       </body>
     </html>
   );
