@@ -30,6 +30,8 @@ const elza = localFont({
   variable: "--font-elza",
 });
 
+// fonts to consider: manrope, poppins
+
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -53,11 +55,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${elza.variable} antialiased min-h-screen bg-black py-5 px-20`}
+        className={`${elza.variable} antialiased min-h-screen bg-black py-5 px-20 flex flex-col items-center`}
         // className={`${geistSans.variable} ${geistMono.variable} ${elza} antialiased min-h-screen bg-black p-5`}
       >
         <NavBar />
-        <main className="flex justify-center">{children}</main>
+        <main>{children}</main>
         <div className="bg-black h-10 py-2">Temp div</div>
       </body>
     </html>

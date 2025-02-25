@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @theme {
-  --color-lily-white: #e2ebe8;
-  --color-contact-red: #bd351f;
-} */
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,4 +19,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   /* font-family: var(--font-elza), sans-serif; */
+  --slider-height: 3em;
+  --slider-width: 6em;
+  --button-width: 2.5em;
+  --button-hold-width: 5.5em;
+  --button-offset: calc((var(--slider-height) - var(--button-width)) / 2);
+  --toggle-distance: calc(
+    (var(--slider-width) - var(--button-width)) - (var(--button-offset) * 2)
+  );
+  --button-hold-offset: calc(
+    var(--slider-width) - var(--button-hold-width) - (var(--button-offset) * 2)
+  );
+
+  /* calc(
+    var(--slider-width) - var(--button-hold-width) - var(--toggle-distance) / 2
+  ); */
 }

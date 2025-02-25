@@ -1,5 +1,7 @@
+"use client";
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import {
   Disclosure,
@@ -7,23 +9,68 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Menu as MenuIcon, X as CloseIcon } from "react-feather";
-import Logo from "../../../public/logo.svg";
+import { useSpring, animated } from "@react-spring/web";
+import Logo from "@/assets/logo.svg";
+import Logo2 from "@/assets/logo-korean.svg";
 
 const navigation = [
-  { name: "About", href: "/about", current: false },
-  { name: "Projects", href: "/projects", current: false },
-  { name: "Contact", href: "/contact", current: false },
+  { name: "About", href: "/about" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/contact" },
 ];
 
 function NavBar() {
+  const [hover, setHover] = React.useState<boolean>(false);
+
+  const slideOne = useSpring({
+    transform: hover ? "translateY(-130%)" : "translateY(0%)",
+    config: { tension: 200, friction: 20 },
+  });
+
+  const slideTwo = useSpring({
+    transform: hover ? "translateY(0%)" : "translateY(130%)",
+    config: { tension: 200, friction: 20 },
+  });
+
+  // seems like typescript error comes when using div.animated, using this as workaround for now
+  const AnimatedLogo = animated(Logo);
+  const AnimatedLogo2 = animated(Logo2);
+
+  const pathname = usePathname();
+  console.log(pathname);
+
   return (
-    <Disclosure as="div" className="flex justify-center items-center">
-      <div className="bg-gray flex flex-row justify-between items-center mb-20 w-[1512px]">
-        <div>
-          <Link href="/">
-            <Logo />
-          </Link>
-        </div>
+    <Disclosure as="div">
+      <div className="bg-gray flex flex-row justify-between items-center lg:mb-20 lg:w-[1512px]">
+        <Link href="/">
+          <div
+            className="relative w-[600px] h-[100px] overflow-hidden"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
+            <AnimatedLogo
+              className="absolute inset-0 self-center"
+              style={slideOne}
+            />
+            <AnimatedLogo2
+              className="absolute inset-0 self-center"
+              style={slideTwo}
+            />
+
+            {/* <animated.div
+              className="absolute inset-0 flex items-center justify-start"
+              style={slideOne}
+            >
+              <Logo />
+            </animated.div>
+            <animated.div
+              className="absolute inset-0 flex items-center justify-start"
+              style={slideTwo}
+            >
+              <Logo2 />
+            </animated.div> */}
+          </div>
+        </Link>
         <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white lg:hidden">
           <span className="absolute -inset-0.5"></span>
           <span className="sr-only">Open main menu</span>
@@ -42,12 +89,12 @@ function NavBar() {
             <Link
               key={item.name}
               href={item.href}
-              aria-current={item.current ? "page" : undefined}
+              aria-current={pathname == item.href ? "page" : undefined}
               className={clsx(
-                item.current
-                  ? "bg-white text-black"
-                  : "bg-white text-black hover:bg-gray-700 hover:text-black",
-                "rounded-full py-2 px-5 font-bold"
+                pathname == item.href
+                  ? "bg-black text-white border-2 border-white"
+                  : "bg-white text-black hover:bg-zinc-400 hover:text-black",
+                "rounded-full py-2 px-5 font-bold self-center"
               )}
             >
               {item.name}
@@ -62,12 +109,12 @@ function NavBar() {
               key={item.name}
               as="a"
               href={item.href}
-              aria-current={item.current ? "page" : undefined}
+              aria-current={pathname == item.href ? "page" : undefined}
               className={clsx(
-                item.current
-                  ? "bg-gray-900 text-black"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-black",
-                "rounded-full py-2 px-5 font-bold"
+                pathname == item.href
+                  ? "bg-gray-900 text-white"
+                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                "block rounded-md px-5 py-2 text-center"
               )}
             >
               {item.name}
