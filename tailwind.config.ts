@@ -18,6 +18,10 @@ export default {
         linkedin_blue: "#5E84C5",
         gray_light_blue: "#AECAE0",
       },
+      spacing: {
+        small_icon: "2rem",
+        medium_icon: "3rem",
+      },
       fontFamily: {
         sans: ["var(--font-elza)", "sans-serif"],
       },

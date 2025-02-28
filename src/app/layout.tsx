@@ -1,36 +1,14 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import "./globals.css";
+import { Manrope } from "next/font/google";
 import NavBar from "@/components/NavBar";
 
-const elza = localFont({
-  src: [
-    {
-      path: "../fonts/ElzaTrial-Black.woff2",
-      weight: "900",
-      style: "black",
-    },
-    {
-      path: "../fonts/ElzaTrial-Bold.woff2",
-      weight: "700",
-      style: "bold",
-    },
-    {
-      path: "../fonts/ElzaTrial-Medium.woff2",
-      weight: "500",
-      style: "medium",
-    },
-    {
-      path: "../fonts/ElzaTrial-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-elza",
-});
-
 // fonts to consider: manrope, poppins
+const manRopeSans = Manrope({
+  variable: "--font-manrope-sans",
+  subsets: ["latin"],
+});
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -55,12 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${elza.variable} antialiased min-h-screen bg-black py-5 px-20 flex flex-col items-center`}
+        className={`${manRopeSans.variable} antialiased min-h-screen bg-black py-5 px-5 sm:px-10 md:px-20 lg:px-24 flex flex-col items-center`}
         // className={`${geistSans.variable} ${geistMono.variable} ${elza} antialiased min-h-screen bg-black p-5`}
       >
         <NavBar />
         <main>{children}</main>
-        <div className="bg-black h-10 py-2">Temp div</div>
       </body>
     </html>
   );

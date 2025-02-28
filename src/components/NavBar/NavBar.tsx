@@ -40,89 +40,89 @@ function NavBar() {
   console.log(pathname);
 
   return (
-    <Disclosure as="div">
-      <div className="bg-gray flex flex-row justify-between items-center lg:mb-20 lg:w-[1512px]">
-        <Link href="/">
-          <div
-            className="relative w-[600px] h-[100px] overflow-hidden"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-          >
-            <AnimatedLogo
-              className="absolute inset-0 self-center"
-              style={slideOne}
-            />
-            <AnimatedLogo2
-              className="absolute inset-0 self-center"
-              style={slideTwo}
-            />
+    <div className="w-full mb-10 lg:mb-20 max-w-[1344px]">
+      <Disclosure as="div">
+        <div className="bg-gray flex flex-row justify-between items-center">
+          <Link href="/">
+            <div
+              className="relative aspect-[6] w-[300px] sm:w-[450px] xl:w-[600px] overflow-hidden"
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            >
+              <AnimatedLogo
+                className="absolute w-full h-full"
+                style={slideOne}
+              />
+              <AnimatedLogo2 className="absolute h-full" style={slideTwo} />
 
-            {/* <animated.div
-              className="absolute inset-0 flex items-center justify-start"
-              style={slideOne}
-            >
-              <Logo />
-            </animated.div>
-            <animated.div
-              className="absolute inset-0 flex items-center justify-start"
-              style={slideTwo}
-            >
-              <Logo2 />
-            </animated.div> */}
-          </div>
-        </Link>
-        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white lg:hidden">
-          <span className="absolute -inset-0.5"></span>
-          <span className="sr-only">Open main menu</span>
-          <MenuIcon
-            aria-hidden="true"
-            className="block h-6 w-6 group-data-[open]:hidden"
-          />
-          <CloseIcon
-            aria-hidden="true"
-            className="hidden h-6 w-6 group-data-[open]:block"
-          />
-        </DisclosureButton>
+              {/* seems like using scale on logo seems to work for now, but hoping to scale svg to parent div */}
+              {/* <animated.div
+                className="absolute inset-0 self-center"
+                style={slideOne}
+              >
+                <Logo className="w-full" />
+              </animated.div>
+              <animated.div
+                className="absolute inset-0 self-center"
+                style={slideTwo}
+              >
+                <Logo2 className="w-full" />
+              </animated.div> */}
+            </div>
+          </Link>
+          <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white lg:hidden">
+            <span className="absolute -inset-0.5"></span>
+            <span className="sr-only">Open main menu</span>
+            <MenuIcon
+              aria-hidden="true"
+              className="block h-6 w-6 group-data-[open]:hidden"
+            />
+            <CloseIcon
+              aria-hidden="true"
+              className="hidden h-6 w-6 group-data-[open]:block"
+            />
+          </DisclosureButton>
 
-        <nav className="hidden flex-row gap-5 lg:flex ">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              aria-current={pathname == item.href ? "page" : undefined}
-              className={clsx(
-                pathname == item.href
-                  ? "bg-black text-white border-2 border-white"
-                  : "bg-white text-black hover:bg-zinc-400 hover:text-black",
-                "rounded-full py-2 px-5 font-bold self-center"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      </div>
-      <DisclosurePanel className="lg:hidden">
-        <div className="space-y-1 px-2 pb-3 pt-2 bg-black">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={pathname == item.href ? "page" : undefined}
-              className={clsx(
-                pathname == item.href
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-md px-5 py-2 text-center"
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
+          <nav className="hidden flex-row gap-5 lg:flex ">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                aria-current={pathname == item.href ? "page" : undefined}
+                className={clsx(
+                  pathname == item.href
+                    ? "bg-black text-white border-2 border-white"
+                    : "bg-white text-black hover:bg-zinc-400 hover:text-black",
+                  "rounded-full py-2 px-5 font-bold self-center"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
         </div>
-      </DisclosurePanel>
-    </Disclosure>
+        <DisclosurePanel className="lg:hidden">
+          <div className="space-y-1 px-2 pb-3 pt-2 bg-black">
+            {navigation.map((item) => (
+              <DisclosureButton
+                key={item.name}
+                as="a"
+                href={item.href}
+                aria-current={pathname == item.href ? "page" : undefined}
+                className={clsx(
+                  pathname == item.href
+                    ? "bg-gray-600 text-white"
+                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  "block rounded-md px-5 py-2 text-center"
+                )}
+              >
+                {item.name}
+              </DisclosureButton>
+            ))}
+          </div>
+        </DisclosurePanel>
+      </Disclosure>
+    </div>
   );
 }
 

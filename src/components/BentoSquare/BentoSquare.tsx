@@ -8,7 +8,10 @@ type BentoSquareProps = {
 function BentoSquare({ children, className }: BentoSquareProps) {
   return (
     <div
-      className={clsx("border border-solid border-black rounded-md", className)}
+      className={clsx(
+        "border border-solid border-black rounded-md p-10",
+        className
+      )}
     >
       {children}
     </div>
