@@ -23,7 +23,7 @@ export default {
         medium_icon: "3rem",
       },
       fontFamily: {
-        sans: ["var(--font-elza)", "sans-serif"],
+        sans: ["var(--font-manrope)", "sans-serif"],
       },
     },
   },

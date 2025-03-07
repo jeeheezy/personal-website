@@ -1,0 +1,139 @@
+"use client";
+import * as React from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { sendEmail } from "@/utils/send-email";
+import { contactFormSchema } from "@/utils/contactSchema";
+import { Field, Label, Input, Textarea, Button } from "@headlessui/react";
+
+import BentoSquare from "../BentoSquare";
+import AnimatedPill from "../AnimatedPill";
+import EmailIcon from "@/assets/contacts.svg";
+import GitHubIcon from "@/assets/github.svg";
+import LinkedInIcon from "@/assets/linkedin.svg";
+
+function Contact() {
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+      honeypot: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof contactFormSchema>) {
+    sendEmail(values);
+  }
+
+  return (
+    <>
+      <div className="flex flex-row gap-3 justify-center align-center mb-3">
+        <h2 className="text-white font-bold text-3xl self-center text-center">
+          Get in Touch
+        </h2>
+        <EmailIcon className="h-small_icon self-center" fill="white" />
+      </div>
+      <p className="text-white text-lg mb-5 text-center">
+        Want to create something together or just say hi? Feel free to send a
+        message or reach out through my socials!
+      </p>
+      <div className="grid md:grid-cols-3 gap-5">
+        <BentoSquare className="bg-contact_red md:col-span-2 ">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <Field className="mb-5">
+              <Label className="mb-3 block text-base font-medium text-black">
+                Full Name
+              </Label>
+              <Input
+                type="text"
+                placeholder="Full Name"
+                className="w-full rounded-md border bg-white py-3 px-6 text-base font-medium text-black outline-none"
+                {...form.register("name", { required: true })}
+              ></Input>
+              <ErrorMessage
+                errors={form.formState.errors}
+                name="name"
+                render={({ message }) => (
+                  <p className="text-black">{message}</p>
+                )}
+              />
+            </Field>
+            <Field className="mb-5">
+              <Label className="mb-3 block text-base font-medium text-black">
+                Email
+              </Label>
+              <Input
+                type="email"
+                placeholder="example@domain.com"
+                className="w-full rounded-md border bg-white py-3 px-6 text-base font-medium text-black outline-none"
+                {...form.register("email", { required: true })}
+              ></Input>
+              <ErrorMessage
+                errors={form.formState.errors}
+                name="email"
+                render={({ message }) => (
+                  <p className="text-black">{message}</p>
+                )}
+              />
+            </Field>
+            <Field className="mb-5">
+              <Label className="mb-3 block text-base font-medium text-black">
+                Message
+              </Label>
+              <Textarea
+                rows={4}
+                placeholder="Type your message"
+                className="w-full resize-none rounded-md border bg-white py-3 px-6 text-base font-medium text-black outline-none "
+                {...form.register("message", { required: true })}
+              ></Textarea>
+              <ErrorMessage
+                errors={form.formState.errors}
+                name="message"
+                render={({ message }) => (
+                  <p className="text-white">{message}</p>
+                )}
+              />
+            </Field>
+            <div className="w-0 h-0 absolute left-[-9999px]">
+              <input
+                {...form.register("honeypot")}
+                type="text"
+                autoComplete="off"
+                tabIndex={-1}
+                className="w-0 h-0"
+              ></input>
+            </div>
+            <Button
+              type="submit"
+              className="hover:shadow-form rounded-md bg-white py-3 px-8 text-base font-semibold text-black outline-none hover:bg-slate-300"
+            >
+              Submit
+            </Button>
+          </form>
+        </BentoSquare>
+        <div className="grid grid-rows-2 gap-3 md:gap-5">
+          <BentoSquare className="bg-peach flex justify-center items-center p-3">
+            <a href="https://github.com/jeeheezy" target="_blank">
+              <AnimatedPill className="gap-3">
+                <GitHubIcon className="h-small_icon" />
+              </AnimatedPill>
+            </a>
+          </BentoSquare>
+          <BentoSquare className="bg-linkedin_blue flex justify-center items-center p-3">
+            <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
+              <AnimatedPill className="gap-3">
+                <LinkedInIcon className="h-small_icon" />
+              </AnimatedPill>
+            </a>
+          </BentoSquare>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Contact;

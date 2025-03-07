@@ -42,7 +42,7 @@ export default function Home() {
         <p>Animation</p>
       </BentoSquare>
       <BentoSquare className="lg:col-start-4 lg:col-span-1 bg-contact_red flex flex-col justify-center items-center gap-5">
-        <EmailIcon className="h-medium_icon" />
+        <EmailIcon className="h-medium_icon" fill="#010101" />
         <Link href="/contact">
           <AnimatedPill>
             <span className="font-black text-xl lg:text-2xl">Contact</span>
