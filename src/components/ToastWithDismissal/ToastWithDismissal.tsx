@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { X as Close } from "react-feather";
 import { Toaster, ToastBar, toast } from "react-hot-toast";
 
 function ToastWithDismissal() {
@@ -27,7 +28,7 @@ function ToastWithDismissal() {
               {icon}
               {message}
               {t.type !== "loading" && (
-                <button onClick={() => toast.dismiss(t.id)}>X</button>
+                <button onClick={() => toast.dismiss(t.id)}>{<Close />}</button>
               )}
             </>
           )}

@@ -14,6 +14,8 @@ import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
 
+import { useTrail } from "@react-spring/web";
+
 function Contact() {
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
@@ -29,6 +31,17 @@ function Contact() {
     sendEmail(values);
   }
 
+  const [play, setPlay] = React.useState<boolean>(false);
+
+  const trails = useTrail(3, {
+    from: { opacity: 0, transform: "translateY(100%)" },
+    to: play ? { opacity: 1, transform: "translateY(0)" } : {},
+  });
+
+  React.useEffect(() => {
+    setPlay(true);
+  }, []);
+
   return (
     <>
       <div className="flex flex-row gap-3 justify-center align-center mb-3">
@@ -42,7 +55,7 @@ function Contact() {
         message or reach out through my socials!
       </p>
       <div className="grid md:grid-cols-3 gap-5">
-        <BentoSquare className="bg-contact_red md:col-span-2 ">
+        <BentoSquare className="bg-contact_red md:col-span-2" style={trails[0]}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Field className="mb-5">
               <Label className="mb-3 block text-base font-medium text-black">
@@ -111,19 +124,25 @@ function Contact() {
               type="submit"
               className="hover:shadow-form rounded-md bg-white py-3 px-8 text-base font-semibold text-black outline-none hover:bg-slate-300"
             >
-              Submit
+              Send Message
             </Button>
           </form>
         </BentoSquare>
         <div className="grid grid-rows-2 gap-3 md:gap-5">
-          <BentoSquare className="bg-peach flex justify-center items-center p-3">
+          <BentoSquare
+            className="bg-peach flex justify-center items-center p-3"
+            style={trails[1]}
+          >
             <a href="https://github.com/jeeheezy" target="_blank">
               <AnimatedPill className="gap-3">
                 <GitHubIcon className="h-small_icon" />
               </AnimatedPill>
             </a>
           </BentoSquare>
-          <BentoSquare className="bg-linkedin_blue flex justify-center items-center p-3">
+          <BentoSquare
+            className="bg-linkedin_blue flex justify-center items-center p-3"
+            style={trails[2]}
+          >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
               <AnimatedPill className="gap-3">
                 <LinkedInIcon className="h-small_icon" />

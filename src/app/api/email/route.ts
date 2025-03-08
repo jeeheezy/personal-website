@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       from: process.env.MY_EMAIL,
       to: email,
       subject: "Thanks for reaching out!",
-      text: `Hi there, thanks for filling out the form! It really means a lot to have caught your interest. I'll be sure to reply back as soon as I can, looking forward to getting connected! \n \n Jeeho Lee`,
+      text: `Hi there, thanks for filling out the form! It really means a lot to have caught your interest. I'll be sure to reply back as soon as I can, looking forward to getting connected!\n \n Jeeho Lee`,
     };
 
     const receivingOptions = {
@@ -45,7 +45,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Email send error: ", error);
     return NextResponse.json(
-      { success: false, message: "Message failed to send." },
+      {
+        success: false,
+        message: "Something went wrong. Message failed to send.",
+      },
       { status: 500 }
     );
   }
