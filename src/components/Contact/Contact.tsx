@@ -14,7 +14,7 @@ import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
 
-import { useTrail } from "@react-spring/web";
+import { useSpring } from "@react-spring/web";
 
 function Contact() {
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -33,9 +33,19 @@ function Contact() {
 
   const [play, setPlay] = React.useState<boolean>(false);
 
-  const trails = useTrail(3, {
-    from: { opacity: 0, transform: "translateY(100%)" },
+  const spring1 = useSpring({
+    from: { opacity: 0, transform: "translateX(-100%)" },
     to: play ? { opacity: 1, transform: "translateY(0)" } : {},
+  });
+  const spring2 = useSpring({
+    from: { opacity: 0, transform: "translateX(100%)" },
+    to: play ? { opacity: 1, transform: "translateY(0)" } : {},
+    delay: 100,
+  });
+  const spring3 = useSpring({
+    from: { opacity: 0, transform: "translateX(100%)" },
+    to: play ? { opacity: 1, transform: "translateY(0)" } : {},
+    delay: 200,
   });
 
   React.useEffect(() => {
@@ -43,7 +53,7 @@ function Contact() {
   }, []);
 
   return (
-    <>
+    <div className=" max-w-[1344px] overflow-hidden">
       <div className="flex flex-row gap-3 justify-center align-center mb-3">
         <h2 className="text-white font-bold text-3xl self-center text-center">
           Get in Touch
@@ -55,7 +65,7 @@ function Contact() {
         message or reach out through my socials!
       </p>
       <div className="grid md:grid-cols-3 gap-5">
-        <BentoSquare className="bg-contact_red md:col-span-2" style={trails[0]}>
+        <BentoSquare className="bg-contact_red md:col-span-2" style={spring1}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Field className="mb-5">
               <Label className="mb-3 block text-base font-medium text-black">
@@ -131,7 +141,7 @@ function Contact() {
         <div className="grid grid-rows-2 gap-3 md:gap-5">
           <BentoSquare
             className="bg-peach flex justify-center items-center p-3"
-            style={trails[1]}
+            style={spring2}
           >
             <a href="https://github.com/jeeheezy" target="_blank">
               <AnimatedPill className="gap-3">
@@ -141,7 +151,7 @@ function Contact() {
           </BentoSquare>
           <BentoSquare
             className="bg-linkedin_blue flex justify-center items-center p-3"
-            style={trails[2]}
+            style={spring3}
           >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
               <AnimatedPill className="gap-3">
@@ -151,7 +161,7 @@ function Contact() {
           </BentoSquare>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

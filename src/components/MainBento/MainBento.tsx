@@ -25,7 +25,7 @@ export default function MainBento() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 lg:grid-cols-4 lg:grid-rows-2 gap-4 lg:gap-6 max-w-[1344px]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-4 lg:grid-cols-4 lg:grid-rows-2 gap-4 lg:gap-6 max-w-[1344px] overflow-hidden">
       <BentoSquare
         className="lg:col-span-2 lg:row-span-1 bg-lily_white flex flex-col justify-center"
         style={trails[0]}
