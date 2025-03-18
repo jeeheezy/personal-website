@@ -25,6 +25,10 @@ export default {
       fontFamily: {
         sans: ["var(--font-manrope)", "sans-serif"],
       },
+      boxShadow: {
+        custom:
+          "0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1)",
+      },
     },
   },
   plugins: [],
