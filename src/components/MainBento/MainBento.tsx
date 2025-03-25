@@ -31,13 +31,14 @@ export default function MainBento() {
       <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-4 lg:grid-rows-2 gap-4 lg:gap-6 max-w-[1344px] overflow-hidden">
         <BentoSquare
           className="lg:col-span-2 lg:row-span-1 bg-lily_white flex flex-col justify-center"
-          style={trails[0]}
+          trailStyle={trails[0]}
         >
-          <p className="font-black text-2xl lg:text-4xl mb-6">JEEHO LEE</p>
+          <p className="font-black text-2xl lg:text-4xl mb-6">Hi there!</p>
           {/* TODO: replace placeholder text */}
           <p className="font-normal text-xl lg:text-2xl mb-6">
-            is a Chicago-based full-stack developer, passionate about crafting
-            sleek, user-friendly code that brings digital experiences to life.
+            {`I'm Jeeho and I'm a full-stack developer with a sharp eye for
+            detail. I love learning new technolgies, problem-solving, and making
+            smooth user-friendly experiences!`}
           </p>
           <div className="flex flex-col xl:flex-row gap-3">
             <Link href="/about">
@@ -61,13 +62,13 @@ export default function MainBento() {
         </BentoSquare>
         <BentoSquare
           className="lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-2 bg-white"
-          style={trails[1]}
+          trailStyle={trails[1]}
         >
           <p>Animation</p>
         </BentoSquare>
         <BentoSquare
           className="lg:col-start-4 lg:col-span-1 bg-contact_red flex flex-col justify-center items-center gap-5"
-          style={trails[2]}
+          trailStyle={trails[2]}
         >
           <EmailIcon className="h-medium_icon" fill="#010101" />
           <Link href="/contact">
@@ -78,7 +79,7 @@ export default function MainBento() {
         </BentoSquare>
         <BentoSquare
           className="lg:col-start-1 lg:col-span-1 lg:row-start-2 bg-project_green flex flex-col justify-center items-center gap-5"
-          style={trails[3]}
+          trailStyle={trails[3]}
         >
           <ProjectsIcon className="h-medium_icon" />
           <Link href="/projects">
@@ -90,7 +91,7 @@ export default function MainBento() {
         <div className="grid grid-row-1 grid-cols-2 gap-3 sm:grid-cols-none sm:grid-rows-2 sm:col-start-2 sm:col-span-1 sm:row-start-2">
           <BentoSquare
             className="bg-peach flex justify-center items-center p-3"
-            style={trails[4]}
+            trailStyle={trails[4]}
           >
             <a href="https://github.com/jeeheezy" target="_blank">
               <AnimatedPill className="gap-3">
@@ -100,7 +101,7 @@ export default function MainBento() {
           </BentoSquare>
           <BentoSquare
             className="bg-linkedin_blue flex justify-center items-center p-3"
-            style={trails[5]}
+            trailStyle={trails[5]}
           >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
               <AnimatedPill className="gap-3">
@@ -111,7 +112,7 @@ export default function MainBento() {
         </div>
         <BentoSquare
           className="lg:col-start-4 lg:col-span-1 lg:row-start-2 bg-gray_light_blue flex justify-center items-center"
-          style={trails[6]}
+          trailStyle={trails[6]}
         >
           <label className="inline-flex items-center cursor-pointer">
             <input

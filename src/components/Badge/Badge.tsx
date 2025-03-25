@@ -10,7 +10,7 @@ function Badge({ children, className }: BadgeProps) {
   return (
     <li
       className={clsx(
-        "inline-block border border-white text-white text-sm font-medium px-2.5 py-0.5 rounded-full",
+        `inline-block border-[1.75px] bg-black border-black text-white  text-sm font-medium px-2.5 py-0.5 rounded-full`,
         className
       )}
     >

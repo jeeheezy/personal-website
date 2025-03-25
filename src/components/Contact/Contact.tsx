@@ -54,8 +54,8 @@ function Contact() {
 
   return (
     <div className=" max-w-[1344px] overflow-hidden">
-      <div className="flex flex-row gap-3 justify-center align-center mb-3">
-        <h2 className="text-white font-bold text-3xl self-center text-center">
+      <div className="flex flex-row gap-3 justify-center align-center mb-5">
+        <h2 className="text-white font-bold text-4xl self-center text-center">
           Get in Touch
         </h2>
         <EmailIcon className="h-small_icon self-center" fill="white" />
@@ -65,7 +65,10 @@ function Contact() {
         message or reach out through my socials!
       </p>
       <div className="grid md:grid-cols-3 gap-5">
-        <BentoSquare className="bg-contact_red md:col-span-2" style={spring1}>
+        <BentoSquare
+          className="bg-contact_red md:col-span-2"
+          trailStyle={spring1}
+        >
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Field className="mb-5">
               <Label className="mb-3 block text-base font-medium text-black">
@@ -141,7 +144,7 @@ function Contact() {
         <div className="grid grid-rows-2 gap-3 md:gap-5">
           <BentoSquare
             className="bg-peach flex justify-center items-center p-3"
-            style={spring2}
+            trailStyle={spring2}
           >
             <a href="https://github.com/jeeheezy" target="_blank">
               <AnimatedPill className="gap-3">
@@ -151,7 +154,7 @@ function Contact() {
           </BentoSquare>
           <BentoSquare
             className="bg-linkedin_blue flex justify-center items-center p-3"
-            style={spring3}
+            trailStyle={spring3}
           >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
               <AnimatedPill className="gap-3">

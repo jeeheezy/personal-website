@@ -37,7 +37,6 @@ function NavBar() {
   const AnimatedLogo2 = animated(Logo2);
 
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <div className="w-full mb-10 lg:mb-20 max-w-[1344px]">
