@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Manrope } from "next/font/google";
+import { Instrument_Sans, Red_Hat_Display } from "next/font/google";
 import NavBar from "@/components/NavBar";
 
-// fonts to consider: manrope, poppins
-const manRopeSans = Manrope({
-  variable: "--font-manrope-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  display: "swap",
   subsets: ["latin"],
 });
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const redHatDisplay = Red_Hat_Display({
+  variable: "--font-redhat",
+  display: "swap",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,8 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manRopeSans.variable} antialiased min-h-screen bg-black py-5 px-5 sm:px-10 md:px-20 lg:px-24 flex flex-col items-center`}
-        // className={`${geistSans.variable} ${geistMono.variable} ${elza} antialiased min-h-screen bg-black p-5`}
+        className={`${instrumentSans.variable} ${redHatDisplay.variable} antialiased min-h-screen bg-black py-5 px-5 sm:px-10 md:px-20 lg:px-24 flex flex-col items-center`}
       >
         <NavBar />
         <main>{children}</main>

@@ -56,7 +56,7 @@ function ProjectBento({
       listeners={listeners}
       dragHandle={true}
     >
-      <h3 className="mb-3 font-bold text-lg">{title}</h3>
+      <h3 className="mb-3 font-bold text-lg font-red_hat">{title}</h3>
       <ul className="flex gap-1 flex-wrap mb-3">
         {technologies.map((technology) => {
           return <Badge key={technology}>{technology}</Badge>;

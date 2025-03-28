@@ -33,7 +33,9 @@ export default function MainBento() {
           className="lg:col-span-2 lg:row-span-1 bg-lily_white flex flex-col justify-center"
           trailStyle={trails[0]}
         >
-          <p className="font-black text-2xl lg:text-4xl mb-6">Hi there!</p>
+          <p className="font-black text-2xl lg:text-4xl mb-6 font-red_hat">
+            Hi there!
+          </p>
           {/* TODO: replace placeholder text */}
           <p className="font-normal text-xl lg:text-2xl mb-6">
             {`I'm Jeeho and I'm a full-stack developer with a sharp eye for
@@ -127,12 +129,11 @@ export default function MainBento() {
               className="relative w-[var(--slider-width)] h-[var(--slider-height)] bg-gray-400 rounded-full transition-all ease-in-out duration-300
             after:content-[''] after:bg-white after:border-gray-400 after:border after:absolute
             after:rounded-full after:h-[var(--button-width)] after:w-[var(--button-width)] after:transition-all after:ease-in-out after:duration-300
-            after:top-[var(--button-offset)] after:start-[var(--button-offset)]
+            after:top-[var(--button-offset)] after:start-[var(--button-offset)] after:hover:bg-slate-600
             peer-checked:bg-blue-500
             peer-checked:after:translate-x-[var(--toggle-distance)]
             peer-active:after:w-[var(--button-hold-width)]
-            peer-active:peer-checked:after:translate-x-[--button-hold-offset]
-          "
+            peer-active:peer-checked:after:translate-x-[--button-hold-offset]"
             ></div>
           </label>
         </BentoSquare>

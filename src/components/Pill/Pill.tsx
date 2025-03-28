@@ -9,7 +9,10 @@ type PillProps = {
 function Pill({ children, className, onMouseEnter }: PillProps) {
   return (
     <div
-      className={clsx("rounded-full py-2 px-5 hover:bg-zinc-300", className)}
+      className={clsx(
+        "rounded-full py-2 px-5 hover:bg-zinc-300 font-red_hat",
+        className
+      )}
       onMouseEnter={onMouseEnter}
     >
       {children}

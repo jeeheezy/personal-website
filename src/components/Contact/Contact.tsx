@@ -55,7 +55,7 @@ function Contact() {
   return (
     <div className=" max-w-[1344px] overflow-hidden">
       <div className="flex flex-row gap-3 justify-center align-center mb-5">
-        <h2 className="text-white font-bold text-4xl self-center text-center">
+        <h2 className="text-white font-bold text-4xl self-center text-center font-red_hat">
           Get in Touch
         </h2>
         <EmailIcon className="h-small_icon self-center" fill="white" />

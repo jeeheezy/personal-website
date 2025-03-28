@@ -23,7 +23,8 @@ export default {
         medium_icon: "3rem",
       },
       fontFamily: {
-        sans: ["var(--font-manrope)", "sans-serif"],
+        instrument: ["var(--font-instrument-sans)", "sans-serif"],
+        red_hat: ["var(--font-redhat)", "sans-serif"],
       },
       boxShadow: {
         custom:

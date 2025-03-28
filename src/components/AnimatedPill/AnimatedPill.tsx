@@ -19,7 +19,7 @@ function AnimatedPill({ className, children }: AnimatedPillProps) {
   return (
     <Pill
       className={clsx(
-        "bg-white hover:bg-stone-200 flex gap-2 justify-center items-center",
+        "bg-white hover:bg-stone-200 flex gap-2 justify-center items-center font-bayon",
         className
       )}
       onMouseEnter={trigger}

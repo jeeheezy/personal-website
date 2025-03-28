@@ -54,7 +54,7 @@ function BentoSquare(
           {...attributes}
           {...listeners}
         >
-          <Move className="active:text-white" />
+          <Move className="active:text-white duration-150" />
         </button>
       )}
 
