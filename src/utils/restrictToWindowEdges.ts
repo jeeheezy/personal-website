@@ -12,7 +12,6 @@ export const restrictToWindowEdges: Modifier = ({
   }
   const adjustedRect = { ...windowRect };
   adjustedRect.height += 500;
-  console.log("adjusted: ", adjustedRect, "window: ", windowRect);
 
   return restrictToBoundingRect(transform, draggingNodeRect, adjustedRect);
 };

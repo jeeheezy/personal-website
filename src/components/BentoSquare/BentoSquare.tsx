@@ -50,11 +50,11 @@ function BentoSquare(
     >
       {dragHandle && (
         <button
-          className="justify-self-end block touch-none"
+          className="justify-self-end block touch-none py-2 px-5 bg-white rounded-full group active:bg-blue-950 duration-150"
           {...attributes}
           {...listeners}
         >
-          <Move className="active:text-white duration-150" />
+          <Move className="group-active:text-white duration-150" />
         </button>
       )}
 

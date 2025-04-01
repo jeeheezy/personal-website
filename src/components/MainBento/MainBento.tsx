@@ -33,11 +33,9 @@ export default function MainBento() {
           className="lg:col-span-2 lg:row-span-1 bg-lily_white flex flex-col justify-center"
           trailStyle={trails[0]}
         >
-          <p className="font-black text-2xl lg:text-4xl mb-6 font-red_hat">
-            Hi there!
-          </p>
+          <p className="font-black text-2xl mb-5 font-red_hat">Hi there!</p>
           {/* TODO: replace placeholder text */}
-          <p className="font-normal text-xl lg:text-2xl mb-6">
+          <p className="font-normal text-xl mb-5">
             {`I'm Jeeho and I'm a full-stack developer with a sharp eye for
             detail. I love learning new technolgies, problem-solving, and making
             smooth user-friendly experiences!`}
@@ -48,15 +46,10 @@ export default function MainBento() {
                 <span className="font-black text-xl lg:text-2xl">About</span>
               </AnimatedPill>
             </Link>
-            <a
-              href={"resume.pdf"}
-              target="_blank"
-              rel="noopener noreferrer"
-              download="JeehoResume.pdf"
-            >
+            <a href={"resume.pdf"} target="_blank" rel="noopener noreferrer">
               <AnimatedPill>
                 <span className="lg:whitespace-nowrap font-black text-xl lg:text-2xl">
-                  Resume (PDF)
+                  Resume
                 </span>
               </AnimatedPill>
             </a>
@@ -96,8 +89,8 @@ export default function MainBento() {
             trailStyle={trails[4]}
           >
             <a href="https://github.com/jeeheezy" target="_blank">
-              <AnimatedPill className="gap-3">
-                <GitHubIcon className="h-small_icon" />
+              <AnimatedPill className="gap-3 group">
+                <GitHubIcon className="h-small_icon fill-black group-hover:fill-white" />
               </AnimatedPill>
             </a>
           </BentoSquare>
@@ -106,8 +99,8 @@ export default function MainBento() {
             trailStyle={trails[5]}
           >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
-              <AnimatedPill className="gap-3">
-                <LinkedInIcon className="h-small_icon" />
+              <AnimatedPill className="gap-3 group">
+                <LinkedInIcon className="h-small_icon fill-linkedin_blue group-hover:fill-white" />
               </AnimatedPill>
             </a>
           </BentoSquare>
@@ -129,7 +122,7 @@ export default function MainBento() {
               className="relative w-[var(--slider-width)] h-[var(--slider-height)] bg-gray-400 rounded-full transition-all ease-in-out duration-300
             after:content-[''] after:bg-white after:border-gray-400 after:border after:absolute
             after:rounded-full after:h-[var(--button-width)] after:w-[var(--button-width)] after:transition-all after:ease-in-out after:duration-300
-            after:top-[var(--button-offset)] after:start-[var(--button-offset)] after:hover:bg-slate-600
+            after:top-[var(--button-offset)] after:start-[var(--button-offset)] after:hover:bg-blue-950
             peer-checked:bg-blue-500
             peer-checked:after:translate-x-[var(--toggle-distance)]
             peer-active:after:w-[var(--button-hold-width)]

@@ -19,14 +19,14 @@ function AnimatedPill({ className, children }: AnimatedPillProps) {
   return (
     <Pill
       className={clsx(
-        "bg-white hover:bg-stone-200 flex gap-2 justify-center items-center font-bayon",
+        "bg-white hover:bg-blue-950 hover:text-white flex gap-2 justify-center items-center font-bayon group",
         className
       )}
       onMouseEnter={trigger}
     >
       {children}
       <animated.span style={style}>
-        <Arrow className="h-small_icon" />
+        <Arrow className="h-small_icon group-hover:stroke-white" />
       </animated.span>
     </Pill>
   );

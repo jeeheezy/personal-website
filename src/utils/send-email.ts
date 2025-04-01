@@ -23,5 +23,4 @@ export async function sendEmail(data: z.infer<typeof contactFormSchema>) {
   } catch (err) {
     alert(err);
   }
-  console.log(data);
 }

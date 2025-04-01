@@ -13,16 +13,20 @@ function ReadMore({ children }: ReadMoreProps) {
       {expanded && children}
       <div
         onClick={() => setExpanded(!expanded)}
-        className="justify-self-center mb-5 outline-none hover:outline hover:outline-black px-10 rounded-md cursor-pointer"
+        className="justify-self-center mb-5 outline-none px-10 cursor-pointer"
       >
         {expanded ? (
           <div className="flex flex-col justify-center items-center">
-            <span className="text-black">View Less</span>
+            <span className="text-black font-black font-red_hat">
+              Read Less
+            </span>
             <ChevronUp color="black" />
           </div>
         ) : (
           <div className="flex flex-col justify-center items-center">
-            <span className="text-black">View More</span>
+            <span className="text-black font-black font-red_hat">
+              Read More
+            </span>
             <ChevronDown color="black" />
           </div>
         )}

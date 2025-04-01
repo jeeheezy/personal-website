@@ -56,7 +56,7 @@ function ProjectBento({
       listeners={listeners}
       dragHandle={true}
     >
-      <h3 className="mb-3 font-bold text-lg font-red_hat">{title}</h3>
+      <h3 className="mb-3 font-black text-2xl font-red_hat">{title}</h3>
       <ul className="flex gap-1 flex-wrap mb-3">
         {technologies.map((technology) => {
           return <Badge key={technology}>{technology}</Badge>;
@@ -66,14 +66,14 @@ function ProjectBento({
       <div className="flex flex-row gap-3">
         {repoUrl && (
           <a href={repoUrl} target="_blank">
-            <AnimatedPill className="gap-3 !bg-white border-white text-black font-bold w-fit">
+            <AnimatedPill className="gap-3 border-white text-black font-bold w-fit">
               View Code
             </AnimatedPill>
           </a>
         )}
         {liveSiteUrl && (
           <a href={liveSiteUrl} target="_blank">
-            <AnimatedPill className="gap-3 !bg-white border-white text-black font-bold w-fit">
+            <AnimatedPill className="gap-3 border-white text-black font-bold w-fit">
               View Site
             </AnimatedPill>
           </a>

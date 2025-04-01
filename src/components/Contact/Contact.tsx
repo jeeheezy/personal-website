@@ -10,7 +10,6 @@ import { Field, Label, Input, Textarea, Button } from "@headlessui/react";
 
 import BentoSquare from "../BentoSquare";
 import AnimatedPill from "../AnimatedPill";
-import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
 
@@ -55,12 +54,11 @@ function Contact() {
   return (
     <div className=" max-w-[1344px] overflow-hidden">
       <div className="flex flex-row gap-3 justify-center align-center mb-5">
-        <h2 className="text-white font-bold text-4xl self-center text-center font-red_hat">
+        <h2 className="text-white font-bold text-2xl self-center text-center font-red_hat">
           Get in Touch
         </h2>
-        <EmailIcon className="h-small_icon self-center" fill="white" />
       </div>
-      <p className="text-white text-lg mb-5 text-center">
+      <p className="text-white text-xl mb-5 text-center">
         Want to create something together or just say hi? Feel free to send a
         message or reach out through my socials!
       </p>
@@ -71,7 +69,7 @@ function Contact() {
         >
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Field className="mb-5">
-              <Label className="mb-3 block text-base font-medium text-black">
+              <Label className="mb-3 block font-black text-white font-red_hat text-xl">
                 Full Name
               </Label>
               <Input
@@ -89,7 +87,7 @@ function Contact() {
               />
             </Field>
             <Field className="mb-5">
-              <Label className="mb-3 block text-base font-medium text-black">
+              <Label className="mb-3 block font-black text-white font-red_hat text-xl">
                 Email
               </Label>
               <Input
@@ -107,7 +105,7 @@ function Contact() {
               />
             </Field>
             <Field className="mb-5">
-              <Label className="mb-3 block text-base font-medium text-black">
+              <Label className="mb-3 block font-black text-white font-red_hat text-xl">
                 Message
               </Label>
               <Textarea
@@ -135,7 +133,7 @@ function Contact() {
             </div>
             <Button
               type="submit"
-              className="hover:shadow-form rounded-md bg-white py-3 px-8 text-base font-semibold text-black outline-none hover:bg-slate-300"
+              className="hover:shadow-form rounded-md bg-white py-3 px-8 text-base font-bold text-black outline-none hover:bg-blue-950 hover:text-white"
             >
               Send Message
             </Button>
@@ -147,8 +145,8 @@ function Contact() {
             trailStyle={spring2}
           >
             <a href="https://github.com/jeeheezy" target="_blank">
-              <AnimatedPill className="gap-3">
-                <GitHubIcon className="h-small_icon" />
+              <AnimatedPill className="gap-3 group">
+                <GitHubIcon className="h-small_icon fill-black group-hover:fill-white" />
               </AnimatedPill>
             </a>
           </BentoSquare>
@@ -157,8 +155,8 @@ function Contact() {
             trailStyle={spring3}
           >
             <a href="https://www.linkedin.com/in/jeehol1999/" target="_blank">
-              <AnimatedPill className="gap-3">
-                <LinkedInIcon className="h-small_icon" />
+              <AnimatedPill className="gap-3 group">
+                <LinkedInIcon className="h-small_icon fill-linkedin_blue group-hover:fill-white" />
               </AnimatedPill>
             </a>
           </BentoSquare>

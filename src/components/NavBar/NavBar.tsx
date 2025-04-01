@@ -55,7 +55,7 @@ function NavBar() {
               <AnimatedLogo2 className="absolute h-full" style={slideTwo} />
             </div>
           </Link>
-          <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white lg:hidden">
+          <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white lg:hidden">
             <span className="absolute -inset-0.5"></span>
             <span className="sr-only">Open main menu</span>
             <MenuIcon
@@ -77,8 +77,8 @@ function NavBar() {
                 className={clsx(
                   pathname == item.href
                     ? "bg-black text-white border-2 border-white"
-                    : "bg-white text-black hover:bg-zinc-400 hover:text-black",
-                  "rounded-full py-2 px-5 font-bold self-center font-red_hat"
+                    : "bg-white text-black hover:bg-blue-950 hover:text-white",
+                  "rounded-full py-2 px-5 font-black self-center font-red_hat"
                 )}
               >
                 {item.name}
@@ -97,8 +97,8 @@ function NavBar() {
                 className={clsx(
                   pathname == item.href
                     ? "bg-gray-600 text-white"
-                    : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                  "block rounded-md px-5 py-2 text-center font-red_hat"
+                    : "text-white hover:bg-blue-950 hover:text-white",
+                  "block rounded-md px-5 py-2 font-black text-center font-red_hat"
                 )}
               >
                 {item.name}
