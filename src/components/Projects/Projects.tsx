@@ -3,12 +3,7 @@ import * as React from "react";
 import ProjectBento from "../ProjectBento";
 import ReadMore from "../ReadMore";
 import Link from "next/link";
-
-import Image, { StaticImageData } from "next/image";
-import DPIImage from "../../../public/DPI-Mentorship.png";
-import AetherImage from "../../../public/Aether.png";
-import TicTacToeImage from "../../../public/TicTacToe.png";
-
+import Image from "next/image";
 import { useTrail } from "@react-spring/web";
 
 import {
@@ -29,9 +24,10 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToWindowEdges } from "@/utils/restrictToWindowEdges";
 
+// TODO: remove imports of Images and just use Public url
 type Project = {
   title: string;
-  image: StaticImageData;
+  image: string;
   technologies: string[];
   summary: string;
   description: string;
@@ -47,7 +43,7 @@ type Project = {
 const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   DPI: {
     title: "DPI Mentorship Platform",
-    image: DPIImage,
+    image: "/DPI-Mentorship.png",
     technologies: [
       "Ruby on Rails",
       "PostgreSQL",
@@ -62,7 +58,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   },
   Aether: {
     title: "Aether VTC",
-    image: AetherImage,
+    image: "/Aether.png",
     technologies: [
       "TypeScript",
       "Nextjs",
@@ -79,7 +75,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   },
   TicTacToe: {
     title: "Ultimate Tic-Tac-Toe",
-    image: TicTacToeImage,
+    image: "/TicTacToe.png",
     technologies: [
       "TypeScript",
       "React",
@@ -96,7 +92,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   Portfolio: {
     title: "Personal Website",
     // to change image here
-    image: DPIImage,
+    image: "/DPI-Mentorship.png",
     technologies: [
       "TypeScript",
       "Nextjs",
@@ -165,7 +161,7 @@ function Projects() {
 
   return (
     <div className="max-w-[1344px]">
-      <h2 className="text-white font-bold text-4xl mb-8 font-red_hat">{`Projects`}</h2>
+      {/* <h2 className="text-white font-bold text-4xl mb-8 font-red_hat">{`Projects`}</h2> */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -189,15 +185,17 @@ function Projects() {
                 >
                   <Image
                     alt="dpi"
-                    src={Project_Consts[item].image}
-                    quality={100}
+                    src={`${Project_Consts[item].image}`}
+                    width={400}
+                    height={300}
+                    style={{ width: "100%", height: "auto" }}
                     className="mb-3"
                   />
-                  <h4 className="font-medium mb-3">
+                  <h4 className="font-normal italic mb-3 text-black">
                     {Project_Consts[item].summary}
                   </h4>
                   <ReadMore>
-                    <p className="mb-3">
+                    <p className="mb-3 text-black">
                       {Project_Consts[item].description
                         .split("\n")
                         .flatMap((line, index) =>
@@ -206,7 +204,7 @@ function Projects() {
                       {Project_Consts[item].link && (
                         <Link
                           href={Project_Consts[item].link.url}
-                          className="underline underline-offset-2"
+                          className="underline underline-offset-2 hover:text-white"
                         >
                           {Project_Consts[item].link.words}
                         </Link>

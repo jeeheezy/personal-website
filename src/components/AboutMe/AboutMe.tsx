@@ -8,6 +8,50 @@ import { useSpring, easings, useTransition, animated } from "@react-spring/web";
 import Pill from "../Pill";
 import { ArrowRight, ArrowDown } from "react-feather";
 
+// can't completely automate positioning as grid positions necessary to make sure overlaps between DOMs in grid can happen
+// the best abstraction I could do for now is have an object to define all the tailwind CSS for grid positioning
+// adding image to imageUrls should automatically find the appropriate grid position based off the array index
+const positionAndRotation: { [key: number]: string } = {
+  1: "-rotate-[1.5deg] col-start-1 row-start-1",
+  2: "rotate-[1deg] col-start-2 row-start-1",
+  3: "rotate-[1.5deg] col-start-3 row-start-1 md:col-start-1 md:row-start-2 xl:col-start-3 xl:row-start-1",
+  4: "rotate-[1.5deg] col-start-1 md:col-start-2 row-start-2 xl:col-start-1",
+  5: "-rotate-[0.5deg] col-start-2 row-start-2 md:col-start-1 md:row-start-3 xl:col-start-2 xl:row-start-2",
+  6: "-rotate-[1.5deg] col-start-3 row-start-2 md:col-start-2 md:row-start-3 xl:col-start-3 xl:row-start-2",
+  7: "-rotate-[1.5deg] row-start-3 col-start-1 md:row-start-4 xl:row-start-3",
+  8: "-rotate-[1deg] row-start-3 col-start-2 md:row-start-4 xl:row-start-3",
+  9: "rotate-[1.5deg] col-start-3 row-start-3 md:col-start-1 md:row-start-5 xl:col-start-3 xl:row-start-3",
+};
+
+const imageUrls = [
+  "/Japan6.png",
+  "/Japan4.png",
+  "/UK1.png",
+  "/Japan3.png",
+  "/Japan1.png",
+  "/Portugal1.png",
+  "/UK2.png",
+  "/Portugal2.png",
+  "/Japan2.png",
+];
+
+const imageAndPosition: Array<{ key: string; gridPosition: number }> = [];
+
+imageUrls.forEach((url, index) => {
+  imageAndPosition.push({
+    key: url,
+    gridPosition: index + 1,
+  });
+});
+
+const initialPhotos: Array<{ key: number; gridPosition: number }> = [];
+for (let i = 1; i < imageUrls.length + 1; i++) {
+  initialPhotos.push({
+    key: i,
+    gridPosition: i,
+  });
+}
+
 function AboutMe() {
   const [play, setPlay] = React.useState<boolean>(false);
 
@@ -29,96 +73,10 @@ function AboutMe() {
     },
   });
 
-  const imageAndPosition = [
-    {
-      key: "/Japan6.png",
-      gridPosition: "-rotate-[1.5deg] col-start-1 row-start-1",
-    },
-    {
-      key: "/Japan4.png",
-      gridPosition: "rotate-[1deg] col-start-2 row-start-1",
-    },
-    {
-      key: "/UK1.png",
-      gridPosition:
-        "rotate-[1.5deg] col-start-1 row-start-2 xl:col-start-3 xl:row-start-1",
-    },
-    {
-      key: "/Japan3.png",
-      gridPosition: "rotate-[1.5deg] col-start-2 row-start-2 xl:col-start-1",
-    },
-    {
-      key: "/Japan1.png",
-      gridPosition:
-        "-rotate-[0.5deg] col-start-1 row-start-3 xl:col-start-2 xl:row-start-2",
-    },
-    {
-      key: "/Portugal1.png",
-      gridPosition:
-        "-rotate-[1.5deg] col-start-2 row-start-3 xl:col-start-3 xl:row-start-2",
-    },
-    {
-      key: "/UK2.png",
-      gridPosition: "-rotate-[1.5deg] col-start-1 row-start-4 xl:row-start-3",
-    },
-    {
-      key: "/Portugal2.png",
-      gridPosition: "-rotate-[1deg] col-start-2 row-start-4 xl:row-start-3",
-    },
-    {
-      key: "/Japan2.png",
-      gridPosition:
-        "rotate-[1.5deg] col-start-1 row-start-5 xl:col-start-3 xl:row-start-3",
-    },
-  ];
-
-  const initialPhotos = [
-    {
-      key: 1,
-      gridPosition: "-rotate-[1.5deg] col-start-1 row-start-1",
-    },
-    {
-      key: 2,
-      gridPosition: "rotate-[1deg] col-start-2 row-start-1",
-    },
-    {
-      key: 3,
-      gridPosition:
-        "rotate-[1.5deg] col-start-1 row-start-2 xl:col-start-3 xl:row-start-1",
-    },
-    {
-      key: 4,
-      gridPosition: "rotate-[1.5deg] col-start-2 row-start-2 xl:col-start-1",
-    },
-    {
-      key: 5,
-      gridPosition:
-        "-rotate-[0.5deg] col-start-1 row-start-3 xl:col-start-2 xl:row-start-2",
-    },
-    {
-      key: 6,
-      gridPosition:
-        "-rotate-[1.5deg] col-start-2 row-start-3 xl:col-start-3 xl:row-start-2",
-    },
-    {
-      key: 7,
-      gridPosition: "-rotate-[1.5deg] col-start-1 row-start-4 xl:row-start-3",
-    },
-    {
-      key: 8,
-      gridPosition: "-rotate-[1deg] col-start-2 row-start-4 xl:row-start-3",
-    },
-    {
-      key: 9,
-      gridPosition:
-        "rotate-[1.5deg] col-start-1 row-start-5 xl:col-start-3 xl:row-start-3",
-    },
-  ];
-
   const [clickButton, setClickButton] = React.useState<boolean>(false);
   const [hasMounted, setHasMounted] = React.useState<boolean>(false);
   const [photos, setPhotos] =
-    React.useState<Array<{ key: string | number; gridPosition: string }>>(
+    React.useState<Array<{ key: string | number; gridPosition: number }>>(
       initialPhotos
     );
 
@@ -148,8 +106,10 @@ function AboutMe() {
         className="bg-lily_white text-black mb-5 md:mb-0"
         trailStyle={spring1}
       >
-        <h3 className="font-black text-2xl mb-8 font-red_hat">About Me</h3>
-        <p className="text-xl mb-3">
+        <h3 className="font-black text-lg md:text-2xl mb-3 md:mb-8 font-red_hat">
+          About Me
+        </h3>
+        <p className="text-md md:text-xl mb-3">
           {`I'm a mostly self-taught full-stack developer that enjoys building things and has a strong focus for details. I have a civil engineering background, but found my passion for software development after working with code as a technical solutions engineer. I love the satisfaction of finding a solution- especially after a long, challenging effort- and the learning process that comes with it.`}
           <br />
           <br />
@@ -182,117 +142,43 @@ function AboutMe() {
         className="bg-gray_light_blue text-black px-2 md:px-10"
         trailStyle={spring2}
       >
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
-          {photoTransitions((style, photo, key) => {
-            return typeof key.key.key === "number" ? (
+        <div className="grid grid-cols-3 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
+          {photoTransitions((style, photo) => {
+            return typeof photo.key === "number" ? (
               <animated.div
-                className={`relative w-full max-w-[171px] h-auto -rotate-[1.5deg] col-span-1 row-span-1 ${photo.gridPosition} z-30`}
+                className={`relative w-full max-w-[171px] h-auto -rotate-[1.5deg] col-span-1 row-span-1 ${
+                  positionAndRotation[photo.gridPosition]
+                } z-30`}
                 style={style}
               >
                 <Image
                   src="/Empty.png"
-                  alt="empty polaroid"
-                  width={200}
+                  alt="Empty Polaroid"
+                  width={171}
                   height={200}
-                  className="max-w-[171px] w-full h-auto object-contain"
+                  style={{ height: "auto", width: "100%" }}
+                  sizes="(max-width: 171px) 100vw, 171px"
+                  priority
                 />
               </animated.div>
             ) : (
               <animated.div
-                className={`relative w-full max-w-[171px] h-auto -rotate-[1.5deg] col-span-1 row-span-1 ${photo.gridPosition} z-10 hover:scale-125`}
+                className={`relative w-full max-w-[171px] h-auto -rotate-[1.5deg] col-span-1 row-span-1 ${
+                  positionAndRotation[photo.gridPosition]
+                } z-10 hover:scale-125`}
                 style={style}
               >
                 <Image
                   src={photo.key as string}
-                  alt="empty polaroid"
-                  width={200}
+                  alt={`${photo.key.replace("/", "")}`}
+                  width={171}
                   height={200}
-                  className="max-w-[171px] w-full h-auto object-contain"
+                  style={{ height: "auto", width: "100%" }}
+                  sizes="(max-width: 171px) 100vw, 171px"
                 />
               </animated.div>
             );
           })}
-          {/* <div className="relative w-full max-w-[171px] h-auto -rotate-[1.5deg]">
-            <Image
-            src="/Empty.png"
-            alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto rotate-[1deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto rotate-[1.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto rotate-[1.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto -rotate-[0.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto -rotate-[1.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto -rotate-[1.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto -rotate-[1deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[171px] h-auto rotate-[1.5deg]">
-            <Image
-              src="/Empty.png"
-              alt="empty polaroid"
-              width={200}
-              height={200}
-              className="max-w-[171px] w-full h-auto object-contain"
-            />
-          </div> */}
         </div>
       </BentoSquare>
     </div>
