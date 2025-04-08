@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import * as React from "react";
 
 import BentoSquare from "@/components/BentoSquare";
@@ -56,10 +57,10 @@ export default function MainBento() {
           </div>
         </BentoSquare>
         <BentoSquare
-          className="lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-2 bg-white"
+          className="lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-span-2 bg-white flex justify-center items-center"
           trailStyle={trails[1]}
         >
-          <p>Animation</p>
+          <Image src="/Oddish.png" alt="oddish" width={300} height={400} />
         </BentoSquare>
         <BentoSquare
           className="lg:col-start-4 lg:col-span-1 bg-contact_red flex flex-col justify-center items-center gap-5"

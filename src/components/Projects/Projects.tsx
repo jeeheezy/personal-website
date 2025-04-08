@@ -92,7 +92,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   Portfolio: {
     title: "Personal Website",
     // to change image here
-    image: "/DPI-Mentorship.png",
+    image: "/personal-website.png",
     technologies: [
       "TypeScript",
       "Nextjs",
@@ -105,6 +105,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
     description: `The website you are currently on! While using similar technologies as other projects, there still were many new challenges and opportunities.\n\nThis was my first time tackling version dependencies, SVG animations, SMTP and AWS SES, and serverless functions. This was also my first time collaborating with a designer (my sister) and taking consideration of color accessibility, font, etc.\n\nIf you have any feedback on what can be improved, feel free to send me a `,
     trailNum: 3,
     link: { words: "message!", url: "/contact" },
+    repoUrl: "https://github.com/jeeheezy/personal-website",
     // to put repo and liveSite url once pushed to github
     // repoUrl: "",
     // liveSiteUrl: "",
