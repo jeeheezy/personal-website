@@ -6,7 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSpring, easings, useTransition, animated } from "@react-spring/web";
 import Pill from "../Pill";
-import { ArrowRight, ArrowDown } from "react-feather";
+import { ArrowRight, ArrowDown, X as Close } from "react-feather";
+import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
+import ImageCarousel from "../ImageCarousel";
+import useBoop from "@/hooks/use-boop";
 
 // can't completely automate positioning as grid positions necessary to make sure overlaps between DOMs in grid can happen
 // the best abstraction I could do for now is have an object to define all the tailwind CSS for grid positioning
@@ -54,6 +57,15 @@ for (let i = 1; i < imageUrls.length + 1; i++) {
 
 function AboutMe() {
   const [play, setPlay] = React.useState<boolean>(false);
+  const [clickButton, setClickButton] = React.useState<boolean>(false);
+  const [hasMounted, setHasMounted] = React.useState<boolean>(false);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
+  const [photos, setPhotos] =
+    React.useState<Array<{ key: string | number; gridPosition: number }>>(
+      initialPhotos
+    );
+  const [carouselIndex, setCarouselIndex] = React.useState<number>(1);
+  const [closeStyle, closeTrigger] = useBoop({ rotation: 10 });
 
   const spring1 = useSpring({
     from: { opacity: 0, transform: "translateX(-100%)" },
@@ -73,13 +85,6 @@ function AboutMe() {
     },
   });
 
-  const [clickButton, setClickButton] = React.useState<boolean>(false);
-  const [hasMounted, setHasMounted] = React.useState<boolean>(false);
-  const [photos, setPhotos] =
-    React.useState<Array<{ key: string | number; gridPosition: number }>>(
-      initialPhotos
-    );
-
   function handleClick() {
     if (!clickButton) {
       setClickButton(true);
@@ -87,11 +92,23 @@ function AboutMe() {
     }
   }
 
+  function openModal(index: number) {
+    setCarouselIndex(index);
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
+    setTimeout(() => {
+      setCarouselIndex(1);
+    }, 300);
+  }
+
   const photoTransitions = useTransition(photos, {
     from: { opacity: 0 },
     enter: { opacity: 1, immediate: true },
     leave: { opacity: 0 },
-    config: { duration: 3000 },
+    config: { duration: 1000 },
     immediate: !hasMounted,
   });
 
@@ -130,8 +147,8 @@ function AboutMe() {
           {`When I'm not working on a project, I'm likely planning my next travel adventures and places to eat!`}
         </p>
         <Pill
-          className="bg-white text-black font-bold text-xl w-fit hover:bg-blue-950 hover:text-white flex flex-row justify-items-center items-center gap-3"
-          onClick={() => handleClick()}
+          className="bg-white text-black font-bold text-xl w-fit hover:bg-blue-950 hover:text-white hover:cursor-pointer flex flex-row justify-items-center items-center gap-3"
+          onClick={handleClick}
         >
           View Some Photos
           <ArrowRight className="hidden md:block" />
@@ -165,8 +182,9 @@ function AboutMe() {
               <animated.div
                 className={`relative w-full max-w-[171px] h-auto -rotate-[1.5deg] col-span-1 row-span-1 ${
                   positionAndRotation[photo.gridPosition]
-                } z-10 hover:scale-125`}
+                } z-10 hover:scale-125 hover:cursor-pointer`}
                 style={style}
+                onClick={() => openModal(photo.gridPosition - 1)}
               >
                 <Image
                   src={photo.key as string}
@@ -181,6 +199,30 @@ function AboutMe() {
           })}
         </div>
       </BentoSquare>
+      <Dialog open={showModal} onClose={closeModal}>
+        <DialogBackdrop className="fixed inset-0 backdrop-blur-sm duration-300 ease-out" />
+        <div className="fixed inset-0 w-screen flex items-center justify-center overflow-y-auto z-10">
+          <DialogPanel
+            transition
+            className="relative w-full max-w-xl flex items-center justify-center duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+          >
+            <button
+              onClick={closeModal}
+              onMouseEnter={closeTrigger}
+              className="absolute -bottom-28 sm:-bottom-20 hover:cursor-pointer group"
+            >
+              <animated.span style={closeStyle}>
+                <Close
+                  color="white"
+                  size={48}
+                  className="group-hover:stroke-red-600"
+                />
+              </animated.span>
+            </button>
+            <ImageCarousel images={imageUrls} startIndex={carouselIndex} />
+          </DialogPanel>
+        </div>
+      </Dialog>
     </div>
   );
 }
