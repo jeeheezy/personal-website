@@ -7,17 +7,17 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Can add later in future, alongside toggling dark/light mode */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
-  /* font-family: Arial, Helvetica, sans-serif; */
   font-family: var(--font-instrument-sans), sans-serif;
   --slider-height: 3em;
   --slider-width: 6em;
