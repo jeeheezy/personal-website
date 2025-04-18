@@ -8,7 +8,7 @@ import { useSpring, easings, useTransition, animated } from "@react-spring/web";
 import Pill from "../Pill";
 import { ArrowRight, ArrowDown, X as Close } from "react-feather";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
-import ImageCarousel from "../ImageCarousel";
+import ImageCarousel, { CarouselRef } from "../ImageCarousel";
 import useBoop from "@/hooks/use-boop";
 
 // can't completely automate positioning as grid positions necessary to make sure overlaps between DOMs in grid can happen
@@ -64,8 +64,8 @@ function AboutMe() {
     React.useState<Array<{ key: string | number; gridPosition: number }>>(
       initialPhotos
     );
-  const [carouselIndex, setCarouselIndex] = React.useState<number>(1);
   const [closeStyle, closeTrigger] = useBoop({ rotation: 10 });
+  const modalCarouselRef = React.useRef<CarouselRef>(null);
 
   const spring1 = useSpring({
     from: { opacity: 0, transform: "translateX(-100%)" },
@@ -93,15 +93,16 @@ function AboutMe() {
   }
 
   function openModal(index: number) {
-    setCarouselIndex(index);
     setShowModal(true);
+    // using requestAnimationFrame here to allow time for showModal state to be set first
+    // otherwise, modal opens to the first image every single time
+    requestAnimationFrame(() => {
+      modalCarouselRef.current?.goToIndex(index, true);
+    });
   }
 
   function closeModal() {
     setShowModal(false);
-    setTimeout(() => {
-      setCarouselIndex(1);
-    }, 300);
   }
 
   const photoTransitions = useTransition(photos, {
@@ -193,6 +194,7 @@ function AboutMe() {
                   height={200}
                   style={{ height: "auto", width: "100%" }}
                   sizes="(max-width: 171px) 100vw, 171px"
+                  loading="eager"
                 />
               </animated.div>
             );
@@ -219,7 +221,11 @@ function AboutMe() {
                 />
               </animated.span>
             </button>
-            <ImageCarousel images={imageUrls} startIndex={carouselIndex} />
+            <ImageCarousel
+              images={imageUrls}
+              startIndex={0}
+              ref={modalCarouselRef}
+            />
           </DialogPanel>
         </div>
       </Dialog>
