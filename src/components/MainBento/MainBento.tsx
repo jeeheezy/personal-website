@@ -131,7 +131,7 @@ export default function MainBento() {
           </label>
         </BentoSquare>
       </div>
-      <ToggledBackground toggle={toggle} />
+      {toggle && <ToggledBackground />}
     </>
   );
 }

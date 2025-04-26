@@ -19,8 +19,6 @@ type AllowedFractions =
   | "-7/8";
 
 type ShootingStarProps = {
-  toggle: boolean;
-  // windowSize: number[];
   duration: number;
   delay?: number;
   className?: string;
@@ -31,8 +29,6 @@ type ShootingStarProps = {
 };
 
 function ShootingStar({
-  toggle,
-  // windowSize,
   offset,
   duration,
   delay = 0,
@@ -105,11 +101,6 @@ function ShootingStar({
               });
             })(),
           ]);
-          // await next({
-          //   delay: delay,
-          //   transform: `translate(${xTranslate}vw, ${yTranslate}vh)`,
-          //   opacity: 1,
-          // });
           await next({
             transform: "translate(0vw, 0vh)",
             opacity: 0,
@@ -127,7 +118,7 @@ function ShootingStar({
         right,
         className
       )}
-      style={toggle ? style : {}}
+      style={style}
     ></animated.span>
   );
 }
