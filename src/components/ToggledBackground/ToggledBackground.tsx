@@ -8,7 +8,7 @@ type ToggledBackgroundProp = {
 
 function ToggledBackground({ blobUrl }: ToggledBackgroundProp) {
   return (
-    <div className="fixed w-screen h-screen inset-0 -z-10 overflow-hidden">
+    <div className="fixed w-screen h-screen inset-0 -z-10 overflow-hidden ">
       {blobUrl ? (
         <>
           <ShootingStar duration={8000} imageUrl={blobUrl} />
@@ -35,8 +35,10 @@ function ToggledBackground({ blobUrl }: ToggledBackgroundProp) {
             offset={{ y: "1/4" }}
             imageUrl={blobUrl}
           />
+          {/* weird bug where the below component seems to not have the correct offset initially, adding in delay as temp fix*/}
           <ShootingStar
             duration={9000}
+            delay={500}
             offset={{ y: "1/2" }}
             imageUrl={blobUrl}
           />
@@ -61,7 +63,8 @@ function ToggledBackground({ blobUrl }: ToggledBackgroundProp) {
           <ShootingStar duration={8000} delay={500} offset={{ y: "1/4" }} />
           <ShootingStar duration={4000} delay={3000} offset={{ y: "3/8" }} />
           <ShootingStar duration={8000} delay={3000} offset={{ y: "1/2" }} />
-          <ShootingStar duration={8000} offset={{ y: "5/8" }} />
+          {/* weird bug where the below component seems to not have the correct offset initially, adding in delay as temp fix*/}
+          <ShootingStar duration={8000} delay={500} offset={{ y: "5/8" }} />
           <ShootingStar duration={5000} delay={3000} offset={{ y: "3/4" }} />
           <ShootingStar duration={7000} delay={1000} offset={{ y: "7/8" }} />
           <ShootingStar duration={5000} offset={{ x: "-1/8", y: "-1/8" }} />
