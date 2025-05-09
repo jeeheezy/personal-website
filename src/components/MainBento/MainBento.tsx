@@ -5,11 +5,13 @@ import * as React from "react";
 
 import BentoSquare from "@/components/BentoSquare";
 import AnimatedPill from "@/components/AnimatedPill";
+import Pill from "../Pill";
 
 import ProjectsIcon from "@/assets/projects.svg";
 import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
+import { Upload, Edit } from "react-feather";
 
 import { useTrail } from "@react-spring/web";
 import ToggledBackground from "../ToggledBackground";
@@ -17,6 +19,23 @@ import ToggledBackground from "../ToggledBackground";
 export default function MainBento() {
   const [play, setPlay] = React.useState<boolean>(false);
   const [toggle, setToggle] = React.useState<boolean>(false);
+  const [blobUrl, setBlobUrl] = React.useState<string | null>(null);
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (blobUrl) {
+      URL.revokeObjectURL(blobUrl);
+    }
+
+    // add in logic to filter certain file types, accept attribute does not do enough
+    if (file) {
+      const newUrl = URL.createObjectURL(file);
+      console.log(newUrl);
+      setBlobUrl(newUrl);
+    } else {
+      setBlobUrl(null);
+    }
+  }
 
   const trails = useTrail(7, {
     from: { opacity: 0, transform: "translateY(100%)" },
@@ -26,6 +45,14 @@ export default function MainBento() {
   React.useEffect(() => {
     setPlay(true);
   }, []);
+
+  React.useEffect(() => {
+    return () => {
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+  }, [blobUrl]);
 
   return (
     <>
@@ -106,7 +133,7 @@ export default function MainBento() {
           </BentoSquare>
         </div>
         <BentoSquare
-          className="lg:col-start-4 lg:col-span-1 lg:row-start-2 bg-gray_light_blue flex justify-center items-center"
+          className="lg:col-start-4 lg:col-span-1 lg:row-start-2 bg-gray_light_blue flex flex-col gap-3 justify-center items-center"
           trailStyle={trails[6]}
         >
           <label className="inline-flex items-center cursor-pointer">
@@ -129,9 +156,25 @@ export default function MainBento() {
             peer-active:peer-checked:after:translate-x-[--button-hold-offset]"
             ></div>
           </label>
+
+          <label>
+            <input
+              type="file"
+              onChange={handleChange}
+              className="hidden"
+              accept="image/png, image/jpeg, image/webp, image/gif"
+            />
+            <Pill className="w-[var(--slider-width)] h-[var(--slider-height)] bg-white hover:bg-blue-950 hover:text-white flex gap-2 justify-center items-center font-bayon group">
+              {blobUrl ? (
+                <Edit className="group-hover:text-white" />
+              ) : (
+                <Upload className="group-hover:text-white" />
+              )}
+            </Pill>
+          </label>
         </BentoSquare>
       </div>
-      {toggle && <ToggledBackground />}
+      {toggle && <ToggledBackground blobUrl={blobUrl} />}
     </>
   );
 }

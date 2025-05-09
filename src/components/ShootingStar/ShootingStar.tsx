@@ -26,6 +26,7 @@ type ShootingStarProps = {
     x?: AllowedFractions;
     y?: AllowedFractions;
   };
+  imageUrl?: string;
 };
 
 function ShootingStar({
@@ -33,6 +34,7 @@ function ShootingStar({
   duration,
   delay = 0,
   className,
+  imageUrl,
 }: ShootingStarProps) {
   const [style, api] = useSpring(() => ({
     from: {
@@ -111,15 +113,33 @@ function ShootingStar({
     });
   }, [api, delay, duration, xTranslate, yTranslate]);
   return (
-    <animated.span
-      className={clsx(
-        "absolute w-1 h-1 bg-white before:absolute before:w-80 before:h-1 before:bg-gradient-to-r from-white to-transparent before:rotate-[310deg] md:before:rotate-[320deg] lg:before:rotate-[340deg]  before:origin-left before:left-0 rounded-full shadow-custom opacity-0",
-        top,
-        right,
-        className
+    <>
+      {imageUrl ? (
+        <animated.div
+          className={clsx(
+            "absolute w-20 h-20 rounded-full opacity-0 bg-center object-fill",
+            top,
+            right,
+            className
+          )}
+          style={{
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: "contain",
+            ...style,
+          }}
+        ></animated.div>
+      ) : (
+        <animated.span
+          className={clsx(
+            "absolute w-1 h-1 bg-white before:absolute before:w-80 before:h-1 before:bg-gradient-to-r from-white to-transparent before:rotate-[310deg] md:before:rotate-[320deg] lg:before:rotate-[340deg]  before:origin-left before:left-0 rounded-full shadow-custom opacity-0",
+            top,
+            right,
+            className
+          )}
+          style={style}
+        ></animated.span>
       )}
-      style={style}
-    ></animated.span>
+    </>
   );
 }
 
