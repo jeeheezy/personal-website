@@ -15,6 +15,15 @@ import { Upload, Edit } from "react-feather";
 
 import { useTrail } from "@react-spring/web";
 import ToggledBackground from "../ToggledBackground";
+import toast from "react-hot-toast";
+
+const ALLOWED_EXTENSIONS = [
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/gif",
+];
+const MAX_FILE_SIZE = 1.5 * 1024 * 1024;
 
 export default function MainBento() {
   const [play, setPlay] = React.useState<boolean>(false);
@@ -27,10 +36,16 @@ export default function MainBento() {
       URL.revokeObjectURL(blobUrl);
     }
 
-    // add in logic to filter certain file types, accept attribute does not do enough
     if (file) {
+      if (!ALLOWED_EXTENSIONS.includes(file.type)) {
+        toast.error("Unsupported file type");
+        setBlobUrl(null);
+        return;
+      }
+      if (file.size >= MAX_FILE_SIZE) {
+        toast.error("File size may be too big and cause performance issues");
+      }
       const newUrl = URL.createObjectURL(file);
-      console.log(newUrl);
       setBlobUrl(newUrl);
     } else {
       setBlobUrl(null);
@@ -162,9 +177,9 @@ export default function MainBento() {
               type="file"
               onChange={handleChange}
               className="hidden"
-              accept="image/png, image/jpeg, image/webp, image/gif"
+              accept={ALLOWED_EXTENSIONS.join(",")}
             />
-            <Pill className="w-[var(--slider-width)] h-[var(--slider-height)] bg-white hover:bg-blue-950 hover:text-white flex gap-2 justify-center items-center font-bayon group">
+            <Pill className="w-[var(--slider-width)] h-[var(--slider-height)] bg-white hover:bg-blue-950 hover:text-white flex gap-2 justify-center items-center font-bayon group cursor-pointer">
               {blobUrl ? (
                 <Edit className="group-hover:text-white" />
               ) : (
