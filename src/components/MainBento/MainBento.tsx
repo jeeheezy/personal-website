@@ -5,18 +5,52 @@ import * as React from "react";
 
 import BentoSquare from "@/components/BentoSquare";
 import AnimatedPill from "@/components/AnimatedPill";
+import Pill from "../Pill";
 
 import ProjectsIcon from "@/assets/projects.svg";
 import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
+import { Upload, Edit } from "react-feather";
 
 import { useTrail } from "@react-spring/web";
 import ToggledBackground from "../ToggledBackground";
+import toast from "react-hot-toast";
+
+const ALLOWED_EXTENSIONS = [
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/gif",
+];
+const MAX_FILE_SIZE = 1.5 * 1024 * 1024;
 
 export default function MainBento() {
   const [play, setPlay] = React.useState<boolean>(false);
   const [toggle, setToggle] = React.useState<boolean>(false);
+  const [blobUrl, setBlobUrl] = React.useState<string | null>(null);
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (blobUrl) {
+      URL.revokeObjectURL(blobUrl);
+    }
+
+    if (file) {
+      if (!ALLOWED_EXTENSIONS.includes(file.type)) {
+        toast.error("Unsupported file type");
+        setBlobUrl(null);
+        return;
+      }
+      if (file.size >= MAX_FILE_SIZE) {
+        toast.error("File size may be too big and cause performance issues");
+      }
+      const newUrl = URL.createObjectURL(file);
+      setBlobUrl(newUrl);
+    } else {
+      setBlobUrl(null);
+    }
+  }
 
   const trails = useTrail(7, {
     from: { opacity: 0, transform: "translateY(100%)" },
@@ -27,6 +61,14 @@ export default function MainBento() {
     setPlay(true);
   }, []);
 
+  React.useEffect(() => {
+    return () => {
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+  }, [blobUrl]);
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-3 lg:grid-cols-4 lg:grid-rows-2 gap-4 lg:gap-6 max-w-[1344px] overflow-hidden">
@@ -35,7 +77,6 @@ export default function MainBento() {
           trailStyle={trails[0]}
         >
           <p className="font-black text-2xl mb-5 font-red_hat">Hi there!</p>
-          {/* TODO: replace placeholder text */}
           <p className="font-normal text-xl mb-5">
             {`I'm Jeeho and I'm a full-stack developer with a sharp eye for
             detail. I love learning new technolgies, problem-solving, and making
@@ -107,7 +148,7 @@ export default function MainBento() {
           </BentoSquare>
         </div>
         <BentoSquare
-          className="lg:col-start-4 lg:col-span-1 lg:row-start-2 bg-gray_light_blue flex justify-center items-center"
+          className="lg:col-start-4 lg:col-span-1 lg:row-start-2 bg-gray_light_blue flex flex-col gap-3 justify-center items-center"
           trailStyle={trails[6]}
         >
           <label className="inline-flex items-center cursor-pointer">
@@ -123,16 +164,32 @@ export default function MainBento() {
               className="relative w-[var(--slider-width)] h-[var(--slider-height)] bg-gray-400 rounded-full transition-all ease-in-out duration-300
             after:content-[''] after:bg-white after:border-gray-400 after:border after:absolute
             after:rounded-full after:h-[var(--button-width)] after:w-[var(--button-width)] after:transition-all after:ease-in-out after:duration-300
-            after:top-[var(--button-offset)] after:start-[var(--button-offset)] after:hover:bg-blue-950
+            after:top-[var(--button-offset)] after:start-[var(--button-offset)]
             peer-checked:bg-blue-500
             peer-checked:after:translate-x-[var(--toggle-distance)]
             peer-active:after:w-[var(--button-hold-width)]
             peer-active:peer-checked:after:translate-x-[--button-hold-offset]"
             ></div>
           </label>
+
+          <label>
+            <input
+              type="file"
+              onChange={handleChange}
+              className="hidden"
+              accept={ALLOWED_EXTENSIONS.join(",")}
+            />
+            <Pill className="w-[var(--slider-width)] h-[var(--slider-height)] bg-white hover:bg-blue-950 hover:text-white flex gap-2 justify-center items-center font-bayon group cursor-pointer">
+              {blobUrl ? (
+                <Edit className="group-hover:text-white" />
+              ) : (
+                <Upload className="group-hover:text-white" />
+              )}
+            </Pill>
+          </label>
         </BentoSquare>
       </div>
-      <ToggledBackground toggle={toggle} />
+      {toggle && <ToggledBackground blobUrl={blobUrl} />}
     </>
   );
 }
