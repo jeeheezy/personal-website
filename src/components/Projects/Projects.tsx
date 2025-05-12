@@ -24,7 +24,6 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToWindowEdges } from "@/utils/restrictToWindowEdges";
 
-// TODO: remove imports of Images and just use Public url
 type Project = {
   title: string;
   image: string;
@@ -43,7 +42,7 @@ type Project = {
 const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   DPI: {
     title: "DPI Mentorship Platform",
-    image: "/DPI-Mentorship.png",
+    image: "/DPI.webp",
     technologies: [
       "Ruby on Rails",
       "PostgreSQL",
@@ -58,7 +57,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   },
   Aether: {
     title: "Aether VTC",
-    image: "/Aether.png",
+    image: "/Aether.webp",
     technologies: [
       "TypeScript",
       "Nextjs",
@@ -75,7 +74,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   },
   TicTacToe: {
     title: "Ultimate Tic-Tac-Toe",
-    image: "/TicTacToe.png",
+    image: "/TicTacToe.webp",
     technologies: [
       "TypeScript",
       "React",
@@ -92,7 +91,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
   Portfolio: {
     title: "Personal Website",
     // to change image here
-    image: "/personal-website.png",
+    image: "/PersonalWebsite.webp",
     technologies: [
       "TypeScript",
       "Nextjs",
@@ -106,9 +105,7 @@ const Project_Consts: { [key: UniqueIdentifier]: Project } = {
     trailNum: 3,
     link: { words: "message!", url: "/contact" },
     repoUrl: "https://github.com/jeeheezy/personal-website",
-    // to put repo and liveSite url once pushed to github
-    // repoUrl: "",
-    // liveSiteUrl: "",
+    liveSiteUrl: "https://www.jeeholee.com/",
   },
 };
 
