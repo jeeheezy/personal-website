@@ -8,6 +8,8 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+import { Move } from "react-feather";
+
 type ProjectBentoProps = {
   title: string;
   technologies: Array<string>;
@@ -52,11 +54,17 @@ function ProjectBento({
       trailStyle={trailStyle}
       dragStyle={dragStyle}
       ref={setNodeRef}
-      attributes={attributes}
-      listeners={listeners}
-      dragHandle={true}
     >
-      <h3 className="mb-3 font-black text-2xl font-red_hat">{title}</h3>
+      <div className="flex flex-row justify-between items-center mb-3">
+        <h3 className="font-black text-2xl font-red_hat">{title}</h3>
+        <button
+          className="touch-none py-2 px-5 bg-white rounded-full group active:bg-blue-950 duration-150"
+          {...attributes}
+          {...listeners}
+        >
+          <Move className="group-active:text-white duration-150" />
+        </button>
+      </div>
       <ul className="flex gap-1 flex-wrap mb-3">
         {technologies.map((technology) => {
           return <Badge key={technology}>{technology}</Badge>;

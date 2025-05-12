@@ -1,10 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 import { animated, SpringValues } from "@react-spring/web";
-import { Move } from "react-feather";
 
-import { DraggableAttributes } from "@dnd-kit/core";
-import { useSortable } from "@dnd-kit/sortable";
 type BentoSquareProps = {
   children: React.ReactNode;
   className?: string;
@@ -17,13 +14,6 @@ type BentoSquareProps = {
     transition?: string | undefined;
   };
   animationDone?: boolean;
-  attributes?: DraggableAttributes;
-  listeners?: ReturnType<typeof useSortable>["listeners"];
-  dragHandle?: boolean;
-  // style?: SpringValues<{
-  //   opacity: number;
-  //   transform: string;
-  // }>;
 };
 
 function BentoSquare(
@@ -33,9 +23,6 @@ function BentoSquare(
     trailStyle,
     dragStyle,
     animationDone,
-    attributes,
-    listeners,
-    dragHandle,
   }: BentoSquareProps,
   ref: React.Ref<HTMLDivElement>
 ) {
@@ -48,16 +35,6 @@ function BentoSquare(
       style={animationDone ? dragStyle : trailStyle}
       ref={ref}
     >
-      {dragHandle && (
-        <button
-          className="justify-self-end block touch-none py-2 px-5 bg-white rounded-full group active:bg-blue-950 duration-150"
-          {...attributes}
-          {...listeners}
-        >
-          <Move className="group-active:text-white duration-150" />
-        </button>
-      )}
-
       {children}
     </animated.div>
   ) : (
