@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "react-feather";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSprings, animated, easings } from "@react-spring/web";
 import useBoop from "@/hooks/use-boop";
 

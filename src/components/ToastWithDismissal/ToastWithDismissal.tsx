@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { X as Close } from "react-feather";
+import { X as Close } from "lucide-react";
 import { Toaster, ToastBar, toast } from "react-hot-toast";
 
 function ToastWithDismissal() {

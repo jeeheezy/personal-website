@@ -11,7 +11,7 @@ import ProjectsIcon from "@/assets/projects.svg";
 import EmailIcon from "@/assets/contacts.svg";
 import GitHubIcon from "@/assets/github.svg";
 import LinkedInIcon from "@/assets/linkedin.svg";
-import { Upload, Edit } from "react-feather";
+import { Upload, Edit } from "lucide-react";
 
 import { useTrail } from "@react-spring/web";
 import ToggledBackground from "../ToggledBackground";

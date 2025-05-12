@@ -8,7 +8,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Menu as MenuIcon, X as CloseIcon } from "react-feather";
+import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
 import { useSpring, animated } from "@react-spring/web";
 import Logo from "@/assets/logo.svg";
 import Logo2 from "@/assets/logo-korean.svg";

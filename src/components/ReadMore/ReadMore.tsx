@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChevronDown, ChevronUp } from "react-feather";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type ReadMoreProps = {
   children: React.ReactNode;

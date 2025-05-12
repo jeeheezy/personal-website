@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSpring, easings, useTransition, animated } from "@react-spring/web";
 import Pill from "../Pill";
-import { ArrowRight, ArrowDown, X as Close } from "react-feather";
+import { ArrowRight, ArrowDown, X as Close } from "lucide-react";
 import { Dialog, DialogPanel, DialogBackdrop } from "@headlessui/react";
 import ImageCarousel, { CarouselRef } from "../ImageCarousel";
 import useBoop from "@/hooks/use-boop";

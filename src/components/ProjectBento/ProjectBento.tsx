@@ -8,7 +8,7 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import { Move } from "react-feather";
+import { GripVertical } from "lucide-react";
 
 type ProjectBentoProps = {
   title: string;
@@ -62,7 +62,7 @@ function ProjectBento({
           {...attributes}
           {...listeners}
         >
-          <Move className="group-active:text-white duration-150" />
+          <GripVertical className="group-active:text-white duration-150" />
         </button>
       </div>
       <ul className="flex gap-1 flex-wrap mb-3">
