@@ -16,18 +16,18 @@ function ReadMore({ children }: ReadMoreProps) {
         className="justify-self-center mb-5 outline-none px-10 cursor-pointer"
       >
         {expanded ? (
-          <div className="flex flex-col justify-center items-center">
-            <span className="text-black font-black font-red_hat">
+          <div className="flex flex-col justify-center items-center group">
+            <span className="text-black font-black font-red_hat group-hover:text-white">
               Read Less
             </span>
-            <ChevronUp color="black" />
+            <ChevronUp className="group-hover:text-white" />
           </div>
         ) : (
-          <div className="flex flex-col justify-center items-center">
-            <span className="text-black font-black font-red_hat">
+          <div className="flex flex-col justify-center items-center group">
+            <span className="text-black font-black font-red_hat group-hover:text-white">
               Read More
             </span>
-            <ChevronDown color="black" />
+            <ChevronDown className="group-hover:text-white" />
           </div>
         )}
       </div>
